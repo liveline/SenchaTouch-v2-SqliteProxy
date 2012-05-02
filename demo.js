@@ -8,6 +8,12 @@ var calculateDesiredWidth = function() {
 };
 
 Ext.setup({
+    requires: [
+        "Ext.data.reader.Array",
+        "Ext.data.Store",
+        "TomAlex0.data.proxy.SqliteConnection",
+        "TomAlex0.data.proxy.SqliteStorage"
+    ],
     tabletStartupScreen: 'tablet_startup.png',
     phoneStartupScreen: 'phone_startup.png',
     icon: 'icon.png',
