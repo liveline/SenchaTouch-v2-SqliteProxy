@@ -57,8 +57,8 @@ Ext.setup({
                         mapping: 'modifyDate', // not working
                         isTableField: false,//newly implemented to distinguish field
                         convert: function(value, rec) {
-                            var dt     = Ext.Date.parseDate(rec.get('modifyDate'), "Y-m-d H:i:s")
-                                newval = Ext.Date.format(dt,'M j, Y, g:i a')
+                            var dt     = Ext.Date.parseDate(rec.get('modifyDate'), "Y-m-d H:i:s"),
+                                newval = Ext.Date.format(dt,'M j, Y, g:i a');
                             return newval;
                         }
                     }
@@ -141,7 +141,7 @@ Ext.setup({
                                     formval.modifyDate = dateval;
                                     console.log(formval,"val");
                                     var rec = Ext.create('Contacts', formval).save();
-                                    console.log(rec,"blahsadsflskflskd")
+                                    console.log(rec,"blahsadsflskflskd");
                                     contactStore.load();
                                     mainform.reset();
                                     addPnl.hide();
@@ -214,7 +214,7 @@ Ext.setup({
                                     var dt = new Date();
                                     var dateval = Ext.Date.format(dt,"Y-m-d H:i:s");
                                     formval.modifyDate = dateval;
-                                    console.log(formval,"formval")
+                                    console.log(formval,"formval");
                                     var rec = Ext.create('Contacts', formval,formval.id);
                                     rec.save();
                                     contactStore.load();
@@ -253,7 +253,7 @@ Ext.setup({
                             ui: 'action',
                             align: 'right',
                             handler: function() {
-                                Ext.Viewport.add(addPnl)
+                                Ext.Viewport.add(addPnl);
                                 addPnl.show();
                             }
                         }
@@ -309,7 +309,7 @@ Ext.setup({
                             console.log(e);
                             if (e.getTarget(".delete")) {
                                 var rec = view.getStore().getAt(index);
-                                console.log(rec,"recird");;
+                                console.log(rec,"recird");
                                 var user = Ext.create('Contacts', {
                                     firstName: "sdfsdf",
                                     id: 4,
