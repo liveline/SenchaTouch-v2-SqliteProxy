@@ -20,6 +20,9 @@ Ext.setup({
     glossOnIcon: false,
     onReady: function() {
 
+        // Destroy the #appLoadingIndicator element
+        Ext.fly('appLoadingIndicator').destroy();
+
         var dbconnval = {
             dbName: "contacts",
             dbDescription: "testdb"
