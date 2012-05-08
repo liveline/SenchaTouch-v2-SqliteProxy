@@ -1,5 +1,22 @@
-/**
- * @author Thomas Alexander
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='TomAlex0-data-proxy-SqliteStorage'>/**
+</span> * @author Thomas Alexander
  *
  * SqliteStorage is simply a superclass for the {@link Ext.data.proxy.LocalStorage localStorage} and {@link
  * Ext.data.proxy.SqliteStorage sqlitestorage} proxies. It uses the  HTML5 Sqlite Database storage to
@@ -8,8 +25,8 @@
  * ## Usage
  * Just define a `sqlitestorage` proxy on your model definition:
  *
- *     Ext.define("Contact", {
- *         extend: "Ext.data.Model",
+ *     Ext.define(&quot;Contact&quot;, {
+ *         extend: &quot;Ext.data.Model&quot;,
  *
  *         config: {
  *             idProperty: 'uniqueid',
@@ -61,7 +78,7 @@ Ext.define('TomAlex0.data.proxy.SqliteStorage', {
     },
     //inherit docs
     create: function(operation, callback, scope) {
-        console.log("create");
+        console.log(&quot;create&quot;);
         var me = this;
         console.log(operation);
         var records = me.getTableFields(operation.getRecords()),
@@ -69,12 +86,12 @@ Ext.define('TomAlex0.data.proxy.SqliteStorage', {
             id, record, i,
             model = this.getModel(),
             idProperty = model.getIdProperty();
-            console.log(idProperty,"model");
+            console.log(idProperty,&quot;model&quot;);
         operation.setStarted();
 
-        for (i = 0; i < length; i++) {
+        for (i = 0; i &lt; length; i++) {
             record = records[i];
-            console.log(record,"record");
+            console.log(record,&quot;record&quot;);
             this.setRecord(record, me.config.dbConfig.tablename, idProperty);
         }
 
@@ -87,15 +104,15 @@ Ext.define('TomAlex0.data.proxy.SqliteStorage', {
     },
     //inherit docs
     update: function(operation, callback, scope) {
-        console.log("update");
+        console.log(&quot;update&quot;);
         var me = this;
         var records = this.getTableFields(operation.getRecords()),
             length = records.length,
             record, id, i, tbl_Id = me.getModel().getClientIdProperty();
-        console.log(me.getModel().getClientIdProperty(),"primaryKey");
+        console.log(me.getModel().getClientIdProperty(),&quot;primaryKey&quot;);
         operation.setStarted();
 
-        for (i = 0; i < length; i++) {
+        for (i = 0; i &lt; length; i++) {
             record = records[i];
             this.updateRecord(record, me.config.dbConfig.tablename,tbl_Id);
         }
@@ -131,13 +148,13 @@ Ext.define('TomAlex0.data.proxy.SqliteStorage', {
     },
     //inherit docs
     destroy: function(operation, callback, scope) {
-        console.log("destroy");
+        console.log(&quot;destroy&quot;);
         var me = this;
         var records = operation.records,
             length = records.length,
             i, tbl_Id = me.getModel().getClientIdProperty();
 
-        for (i = 0; i < length; i++) {
+        for (i = 0; i &lt; length; i++) {
             this.removeRecord(records[i].data[tbl_Id], me.config.dbConfig.tablename, tbl_Id, false);
         }
 
@@ -148,16 +165,16 @@ Ext.define('TomAlex0.data.proxy.SqliteStorage', {
             callback.call(scope || this, operation);
         }
     },
-    /**
-     *@private
+<span id='TomAlex0-data-proxy-SqliteStorage-method-getDb'>    /**
+</span>     *@private
      * Get Database instance
      */
     getDb : function(){
         //return Ext.DbConnection.dbConn || this.config.dbConfig.dbConn;
         return this.config.dbConfig.dbConn.dbConn;
     },
-    /**
-     *@private
+<span id='TomAlex0-data-proxy-SqliteStorage-method-createTable'>    /**
+</span>     *@private
      *Creates table if not exists
      */
     createTable : function(){
@@ -169,7 +186,7 @@ Ext.define('TomAlex0.data.proxy.SqliteStorage', {
             };
 
             var onSucess = function(tx, results) {
-               console.log("success");
+               console.log(&quot;success&quot;);
             };
 
             var createTableSchema = function() {
@@ -182,8 +199,8 @@ Ext.define('TomAlex0.data.proxy.SqliteStorage', {
         });
 
     },
-     /**
-     * @private
+<span id='TomAlex0-data-proxy-SqliteStorage-method-constructFields'>     /**
+</span>     * @private
      * Get reader data and set up fields accordingly
      * Used for table creation only
      * @return {String} fields separated by a comma
@@ -195,7 +212,7 @@ Ext.define('TomAlex0.data.proxy.SqliteStorage', {
             flatFields = [];
             Ext.each(fields, function(f) {
 
-                if((f.config.isTableField || !Ext.isDefined(f.config.isTableField)) && (f.getName() != m.getIdProperty())){
+                if((f.config.isTableField || !Ext.isDefined(f.config.isTableField)) &amp;&amp; (f.getName() != m.getIdProperty())){
                     var name = f.getName();
                     var type = f.config.type;
                     var fieldoption = (f.config.fieldOption)  ? f.config.fieldOption : '';
@@ -207,9 +224,9 @@ Ext.define('TomAlex0.data.proxy.SqliteStorage', {
             });
         return flatFields.join(',');
     },
-    /**
-     * function to return records w.r.t to table fields. If model has fields
-     * which is not table field name, it will break create and update functionalitites.This looks for field property "isTableField"
+<span id='TomAlex0-data-proxy-SqliteStorage-method-getTableFields'>    /**
+</span>     * function to return records w.r.t to table fields. If model has fields
+     * which is not table field name, it will break create and update functionalitites.This looks for field property &quot;isTableField&quot;
      */
     getTableFields : function(records){
        console.log(records);
@@ -223,12 +240,12 @@ Ext.define('TomAlex0.data.proxy.SqliteStorage', {
                 }
             });
 
-        for (i = 0; i < length; i++) {
+        for (i = 0; i &lt; length; i++) {
             record = records[i];
-            console.log(removedField,"remove");
+            console.log(removedField,&quot;remove&quot;);
             Ext.each(removedField,function(item,index){
-                console.log(record.getData(),"record");
-                console.log(item,"item");
+                console.log(record.getData(),&quot;record&quot;);
+                console.log(item,&quot;item&quot;);
                 delete record.getData()[item];
             });
             console.log(record);
@@ -237,8 +254,8 @@ Ext.define('TomAlex0.data.proxy.SqliteStorage', {
         console.log(newrecords);
         return newrecords;
     },
-     /**
-     * execute sql statements
+<span id='TomAlex0-data-proxy-SqliteStorage-method-queryDB'>     /**
+</span>     * execute sql statements
      * @param {Object} dbConn Database connection Value
      * @param {String} sql Sql Statement
      * @param {Function} successcallback  success callback for sql execution
@@ -257,9 +274,9 @@ Ext.define('TomAlex0.data.proxy.SqliteStorage', {
             sql, (params ? params : []), successcallback, errorcallback);
         });
     },
-     /**
-     * @private
-     * Created array of objects, each representing field=>value pair.
+<span id='TomAlex0-data-proxy-SqliteStorage-method-parseData'>     /**
+</span>     * @private
+     * Created array of objects, each representing field=&gt;value pair.
      * @param {Object} tx Transaction
      * @param {Object} rs Response
      * @return {Array} Returns parsed data
@@ -269,7 +286,7 @@ Ext.define('TomAlex0.data.proxy.SqliteStorage', {
         var rows = rs.rows,
             data = [],
             i = 0;
-        for (; i < rows.length; i++) {
+        for (; i &lt; rows.length; i++) {
             data.push(rows.item(i));
         }
         return data;
@@ -293,7 +310,7 @@ Ext.define('TomAlex0.data.proxy.SqliteStorage', {
 
         //finish with callback
         operation.setRecords(data);
-        if (typeof callback == "function") {
+        if (typeof callback == &quot;function&quot;) {
             callback.call(scope || me, operation);
         }
     },
@@ -305,8 +322,8 @@ Ext.define('TomAlex0.data.proxy.SqliteStorage', {
         var records = me.parseData(tx, results);
         console.log(records.length);
         var storedatas = [];
-        if (results.rows && records.length) {
-            for (i = 0; i < results.rows.length; i++) {
+        if (results.rows &amp;&amp; records.length) {
+            for (i = 0; i &lt; results.rows.length; i++) {
                 console.log(records[i]);
                 storedatas.push(new Model(records[i]));
             }
@@ -315,22 +332,22 @@ Ext.define('TomAlex0.data.proxy.SqliteStorage', {
         me.applyData(storedatas, operation, callback, scope);
     },
 
-    /**
-     * Output Query Error
+<span id='TomAlex0-data-proxy-SqliteStorage-method-throwDbError'>    /**
+</span>     * Output Query Error
      * @param {Object} tx Transaction
      * @param {Object} rs Response
      */
     throwDbError: function(tx, err) {
-        console.log(this.type + "----" + err.message);
+        console.log(this.type + &quot;----&quot; + err.message);
     },
-    /**
-     * Saves the given record in the Proxy.
+<span id='TomAlex0-data-proxy-SqliteStorage-method-setRecord'>    /**
+</span>     * Saves the given record in the Proxy.
      * @param {Ext.data.Model} record The model instance
      */
     setRecord: function(record, tablename, primarykey) {
         console.log(primarykey);
-        console.log(record.internalId,"recprd1");
-        console.log(record.getData().id,"recprd2");
+        console.log(record.internalId,&quot;recprd1&quot;);
+        console.log(record.getData().id,&quot;recprd2&quot;);
         var me = this,
             rawData = record.getData(),
             fields = [],
@@ -338,7 +355,7 @@ Ext.define('TomAlex0.data.proxy.SqliteStorage', {
             placeholders = [],
 
             onSuccess = function(tx, rs) {
-                console.log(rs,"balh");
+                console.log(rs,&quot;balh&quot;);
                 var returnrecord = record,
                 insertId = rs.insertId;
                 returnrecord.data[primarykey] = insertId;
@@ -348,8 +365,8 @@ Ext.define('TomAlex0.data.proxy.SqliteStorage', {
             onError = function(tx, err) {
                 me.throwDbError(tx, err);
             };
-            console.log(rawData,"rawdata");
-            console.log(rawData.id,"id val");
+            console.log(rawData,&quot;rawdata&quot;);
+            console.log(rawData.id,&quot;id val&quot;);
         //extract data to be inserted
         for (var i in rawData) {
             console.log(rawData[i],i);
@@ -365,17 +382,17 @@ Ext.define('TomAlex0.data.proxy.SqliteStorage', {
         Ext.iterate(rawData,function(a,b){
             console.log(a,b);
         }); 
-        console.log(fields,"fields");
-        console.log(values,"values");
+        console.log(fields,&quot;fields&quot;);
+        console.log(values,&quot;values&quot;);
         var sql = 'INSERT INTO ' + tablename + '(' + fields.join(',') + ') VALUES (' + placeholders.join(',') + ')';
-        console.log(sql,"sql");
+        console.log(sql,&quot;sql&quot;);
         me.queryDB(me.getDb(), sql, onSuccess, onError, values);
 
         return true;
     },
 
-    /**
-     * Updates the given record.
+<span id='TomAlex0-data-proxy-SqliteStorage-method-updateRecord'>    /**
+</span>     * Updates the given record.
      * @param {Ext.data.Model} record The model instance
      */
     updateRecord: function(record, tablename, primarykey) {
@@ -409,8 +426,8 @@ Ext.define('TomAlex0.data.proxy.SqliteStorage', {
         me.queryDB(me.getDb(), sql, onSuccess, onError, values);
         return true;
     },
-    /**
-     * @private
+<span id='TomAlex0-data-proxy-SqliteStorage-method-removeRecord'>    /**
+</span>     * @private
      * Physically removes a given record from the object store. 
      * @param {Mixed} id The id of the record to remove
      */
@@ -429,8 +446,8 @@ Ext.define('TomAlex0.data.proxy.SqliteStorage', {
         return true;
     },
 
-    /**
-     * Destroys all records stored in the proxy 
+<span id='TomAlex0-data-proxy-SqliteStorage-method-truncate'>    /**
+</span>     * Destroys all records stored in the proxy 
      */
     truncate: function(tablename) {
         var me = this;
@@ -439,3 +456,6 @@ Ext.define('TomAlex0.data.proxy.SqliteStorage', {
         return true;
     }
 });
+</pre>
+</body>
+</html>

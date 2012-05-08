@@ -1,0 +1,8 @@
+// To regenerate docs, install the `jsduck` ruby gem and then run `jsduck --config doc.json`
+{
+    "--title": "Sencha Touch I18n Documentation",
+    "--output": "doc",
+    "--": [
+        "lib"
+    ]
+}
